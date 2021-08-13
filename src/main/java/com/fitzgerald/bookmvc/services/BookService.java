@@ -21,7 +21,7 @@ public class BookService {
     
     // returns all the books
     public List<Book> allBooks() {
-        return this.bookRepository.findAll();
+        return (List<Book>) this.bookRepository.findAll();
     }
     
     // creates/saves a book
@@ -63,7 +63,7 @@ public class BookService {
     		
     		return this.bookRepository.save(b);
     }
-    
+
 //optional conditional does the same thing as the method above
 //    public Book findBook(Long id) {
 //        Optional<Book> optionalBook = bookRepository.findById(id);

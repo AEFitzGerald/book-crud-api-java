@@ -42,7 +42,7 @@ public class BooksApi {
 	
 	//creates a book
 	@PostMapping(value="/api/books/create")
-	public Book create(@RequestParam(value="title") String title, @RequestParam(value="description") String desc, @RequestParam(value="language") String lang, @RequestParam(value="pages") Integer numOfPages) {
+	public Book create(@RequestParam(value="title") String title, @RequestParam(value="description") String desc, @RequestParam(value="language") String lang, @RequestParam(value="numberOfPages") Integer numOfPages) {
 		
 		//create a new book object using constructor in Book.java model
 		Book book = new Book(title, desc, lang, numOfPages);
