@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fitzgerald.bookmvc.models.Book;
 import com.fitzgerald.bookmvc.services.BookService;
@@ -54,4 +55,30 @@ public class BooksController {
 				
 				return "show.jsp";
 			}
+		
+		 @RequestMapping("/books/edit/{id}")
+		 public String edit(@PathVariable("id") Long id, Model model) {
+		        Book book = bookService.findBook(id);
+		        model.addAttribute("book", book);
+		        
+		        return "edit.jsp";
+		    }
+		    
+		 @PostMapping(value="/books/{id}")
+		 public String update(@Valid @ModelAttribute("book") Book book, BindingResult result) {
+		        if (result.hasErrors()) {
+		            return "edit.jsp";
+		        } else {
+		            bookService.updateBook(book);
+		            return "redirect:/books";
+		        }
+		    }
+		 
+		 @RequestMapping(value="/books/{id}", method=RequestMethod.DELETE)
+		 public String destroy(@PathVariable("id") Long id) {
+		       
+			 	bookService.deleteBook(id);
+		        
+			 	return "redirect:/books";
+		    }
 	}
